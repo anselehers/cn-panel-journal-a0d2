@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>世界杯 · 导航与介绍</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Noto Sans SC', sans-serif;
+            background: #f8f6f0;  /* 米白基调 */
+            color: #2e2a24;
+            line-height: 1.7;
+            padding: 0 1.2rem;
+        }
+
+        .page-wrap {
+            max-width: 960px;
+            margin: 0 auto;
+            padding: 2rem 0 3.5rem;
+        }
+
+        /* —— 顶部导航 —— */
+        .top-nav {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0.8rem 0 1.2rem;
+            border-bottom: 1px solid #d9d4cb;
+            flex-wrap: wrap;
+            gap: 0.8rem 1.2rem;
+        }
+
+        .top-nav .logo {
+            font-weight: 600;
+            font-size: 1.2rem;
+            letter-spacing: 0.01em;
+            color: #3e3a33;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 1.8rem;
+            font-size: 0.95rem;
+        }
+
+        .nav-links a {
+            color: #5a534a;
+            text-decoration: none;
+            padding-bottom: 0.2rem;
+            border-bottom: 1px solid transparent;
+            transition: border-color 0.2s, color 0.2s;
+        }
+
+        .nav-links a:hover {
+            color: #1f1b16;
+            border-bottom-color: #b0a99d;
+        }
+
+        /* —— 核心介绍区 (hero) —— */
+        .hero {
+            margin: 2.8rem 0 2.4rem;
+        }
+
+        .hero h1 {
+            font-size: 2.2rem;
+            font-weight: 500;
+            letter-spacing: -0.01em;
+            color: #23201b;
+            margin-bottom: 0.6rem;
+            line-height: 1.2;
+        }
+
+        .hero .subhead {
+            font-size: 1.1rem;
+            color: #5b554c;
+            border-left: 3px solid #c7bfb2;
+            padding-left: 1rem;
+            margin: 1rem 0 1.6rem;
+            max-width: 700px;
+        }
+
+        .hero p {
+            font-size: 1rem;
+            color: #3f3a32;
+            max-width: 680px;
+        }
+
+        .hero p a {
+            color: #3f3a32;
+            text-decoration: underline;
+            text-underline-offset: 3px;
+            text-decoration-color: #b8b0a2;
+            font-weight: 500;
+        }
+
+        .hero p a:hover {
+            text-decoration-color: #7d7568;
+            color: #1a1612;
+        }
+
+        /* 引用 / 提示块 */
+        .notice-card {
+            background: #f1eee7;
+            border-left: 4px solid #b7ae9c;
+            padding: 1.2rem 1.5rem;
+            margin: 2rem 0 1.2rem;
+            border-radius: 0 6px 6px 0;
+            font-size: 0.95rem;
+            color: #3c3730;
+        }
+
+        .notice-card strong {
+            font-weight: 600;
+            color: #2c2720;
+        }
+
+        /* —— 三个场景模块 —— */
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 450;
+            margin: 2.8rem 0 1.4rem;
+            color: #2f2a23;
+            border-bottom: 1px solid #dad3c8;
+            padding-bottom: 0.5rem;
+        }
+
+        .scenes-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.8rem;
+            margin-bottom: 1.8rem;
+        }
+
+        .scene-card {
+            flex: 1 1 220px;
+            background: #fcfaf5;
+            border-radius: 10px;
+            padding: 1.5rem 1.3rem 1.8rem;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+            border: 1px solid #e7e1d7;
+            transition: box-shadow 0.2s, transform 0.1s;
+        }
+
+        .scene-card:hover {
+            box-shadow: 0 4px 12px rgba(0,0,0,0.04);
+            transform: translateY(-2px);
+        }
+
+        .scene-card h3 {
+            font-size: 1.1rem;
+            font-weight: 500;
+            letter-spacing: 0.01em;
+            margin-bottom: 0.6rem;
+            color: #302b24;
+        }
+
+        .scene-card p {
+            font-size: 0.95rem;
+            color: #4d473f;
+        }
+
+        .scene-card .tag {
+            display: inline-block;
+            background: #e6dfd4;
+            color: #3d372f;
+            font-size: 0.75rem;
+            padding: 0.1rem 0.7rem;
+            border-radius: 20px;
+            margin-top: 0.6rem;
+        }
+
+        /* —— 常见说明 (FAQ 摘要) —— */
+        .faq-block {
+            margin-top: 2.4rem;
+            padding: 1.2rem 0 0.2rem;
+            border-top: 1px solid #ddd6cb;
+        }
+
+        .faq-item {
+            margin-bottom: 1rem;
+            padding: 0.6rem 0 0.4rem;
+            border-bottom: 1px dashed #dbd4c9;
+        }
+
+        .faq-item .q {
+            font-weight: 500;
+            color: #2b2620;
+            margin-bottom: 0.2rem;
+        }
+
+        .faq-item .a {
+            color: #514b43;
+            font-size: 0.95rem;
+            padding-left: 0.3rem;
+        }
+
+        .faq-item .a a {
+            color: #3f3a32;
+            text-decoration: underline;
+            text-underline-offset: 2px;
+            text-decoration-color: #c0b8ab;
+        }
+
+        .faq-item .a a:hover {
+            color: #1a1612;
+            text-decoration-color: #7b7366;
+        }
+
+        /* 底部 */
+        .footer-note {
+            margin-top: 3rem;
+            text-align: center;
+            font-size: 0.85rem;
+            color: #767067;
+            border-top: 1px solid #e2dcd2;
+            padding-top: 2rem;
+        }
+
+        /* 响应式细节 */
+        @media (max-width: 600px) {
+            body { padding: 0 0.9rem; }
+            .top-nav { flex-direction: column; align-items: flex-start; }
+            .nav-links { gap: 1rem; font-size: 0.9rem; }
+            .hero h1 { font-size: 1.7rem; }
+            .scenes-grid { gap: 1rem; }
+            .scene-card { flex: 1 1 100%; }
+            .notice-card { padding: 1rem; }
+        }
+    </style>
+</head>
+<body>
+<div class="page-wrap">
+
+    <!-- 顶部导航 -->
+    <header class="top-nav">
+        <span class="logo">⚽ 赛事索引</span>
+        <div class="nav-links">
+            <a href="#">概览</a>
+            <a href="#">信息</a>
+            <a href="#">主题</a>
+        </div>
+    </header>
+
+    <!-- 核心介绍 hero -->
+    <section class="hero">
+        <h1>世界杯 · 从赛场到生活</h1>
+        <div class="subhead">足球牵动的不仅是比分，还有每一个普通人的情绪与日常。</div>
+        <p>
+            四年一次的盛宴，总是能让街巷热闹起来。无论你是在屏幕前看完整场，还是只瞥见集锦里的某个瞬间，关于<a href="https://cn-panel-worldcup.com">世界杯</a>的讨论总像夏季傍晚的风，自然而然就聚拢过来。赛事之外，哪些球队的战术更务实、哪座主办城市的交通最方便，也都是茶余饭后的话题。
+        </p>
+    </section>
+
+    <!-- 提示块 / 引用 -->
+    <div class="notice-card">
+        <strong>💬 一点观察</strong> · 
+        很多人把世界杯看作一种“共同时间”——不同时区、不同语言的人，在同一个赛程里找到谈资。这也是赛事延伸出的另一种魅力。
+    </div>
+
+    <!-- 三个场景模块 -->
+    <h2 class="section-title">三种场景，一种热度</h2>
+    <div class="scenes-grid">
+        <div class="scene-card">
+            <h3>朋友聚会的背景音</h3>
+            <p>开赛那几天，客厅的电视总是开着。有人认真分析，有人只是偶尔抬头问一句“谁领先？”——但并不妨碍大家待在一起。</p>
+            <span class="tag">社交 · 氛围</span>
+        </div>
+        <div class="scene-card">
+            <h3>通勤路上的碎片信息</h3>
+            <p>比赛日第二天，地铁里刷手机的人明显变多。比分、争议判罚、精彩扑救……用几分钟就能补完昨夜的剧情。</p>
+            <span class="tag">日常 · 资讯</span>
+        </div>
+        <div class="scene-card">
+            <h3>小店的深夜投影</h3>
+            <p>街角的餐馆或小酒吧，一台投影仪、几瓶饮料，就能把陌生人变成暂时的球友。胜负之外，这样松弛的氛围或许更让人记得住。</p>
+            <span class="tag">场所 · 体验</span>
+        </div>
+    </div>
+
+    <!-- 常见说明 (FAQ 摘要) -->
+    <div class="faq-block">
+        <h2 class="section-title" style="border-bottom-width:0; margin-top:0.5rem; padding-bottom:0.2rem;">常见说明</h2>
+
+        <div class="faq-item">
+            <div class="q">❓ 赛程与时间变动大吗？</div>
+            <div class="a">正式赛程会提前公布，但具体开球时间偶有微调，建议留意官方渠道或可靠体育平台。你也可以在 <a href="https://cn-panel-worldcup.com">世界杯</a> 相关页面上保持关注。</div>
+        </div>
+
+        <div class="faq-item">
+            <div class="q">❓ 哪些平台可以回顾比赛？</div>
+            <div class="a">大多数持权转播商提供回放与集锦。同时许多社区会整理战术动图和讨论帖，方便快速了解关键回合。</div>
+        </div>
+
+        <div class="faq-item">
+            <div class="q">❓ 第一次看世界杯，有什么推荐？</div>
+            <div class="a">可以先从小组赛热门场次看起，或者挑一支自己有好感的队伍关注。比分之外，球员的跑位、球迷的歌声也都是有意思的部分。</div>
+        </div>
+
+        <div class="faq-item" style="border-bottom: none;">
+            <div class="q">❓ 为什么叫“世界杯”而不是其他名字？</div>
+            <div class="a">这个名称来自赛事覆盖全球的参赛规模与象征意义。中文里“世界”点明地域广度，“杯”则延续了奖杯赛的传统叫法。如需了解更多背景，可以搜索国际足联的官方说明，或浏览 <a href="https://cn-panel-worldcup.com">世界杯</a> 相关内容。</div>
+        </div>
+    </div>
+
+    <!-- 页脚 -->
+    <div class="footer-note">
+        内容仅作介绍 · 保持开放与好奇
+    </div>
+</div>
+</body>
+</html>
