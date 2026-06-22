@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>信息卡片 · 28圈回顾与收藏</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #f2f4f7;
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+            line-height: 1.6;
+            color: #1e293b;
+            padding: 2rem 1rem;
+        }
+
+        .page-container {
+            max-width: 1120px;
+            margin: 0 auto;
+        }
+
+        /* 主视觉卡片 hero */
+        .hero-card {
+            background: #ffffff;
+            border-radius: 28px;
+            padding: 3rem 2.5rem;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.04);
+            border: 1px solid #e9edf2;
+            margin-bottom: 2.5rem;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .hero-content {
+            flex: 1 1 300px;
+        }
+
+        .hero-content h1 {
+            font-size: 2.6rem;
+            font-weight: 500;
+            letter-spacing: -0.02em;
+            margin-bottom: 1rem;
+            color: #0f172a;
+        }
+
+        .hero-content h1 span {
+            background: #eef2f6;
+            padding: 0.1rem 0.6rem;
+            border-radius: 36px;
+            font-weight: 400;
+            font-size: 1.8rem;
+            color: #1e3a5f;
+        }
+
+        .hero-desc {
+            font-size: 1.1rem;
+            color: #334155;
+            max-width: 520px;
+            margin-bottom: 1.8rem;
+        }
+
+        .hero-visual {
+            flex: 0 1 200px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: #f8fafd;
+            border-radius: 48px;
+            padding: 1.2rem 0.8rem;
+            border: 1px solid #dee5ed;
+        }
+
+        .hero-visual .icon-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 0.6rem;
+        }
+
+        .hero-visual .icon-grid div {
+            width: 32px;
+            height: 32px;
+            background: #dce3ec;
+            border-radius: 10px;
+        }
+
+        .hero-visual .icon-grid div:nth-child(odd) {
+            background: #b9c7da;
+        }
+
+        .hero-visual .icon-grid div:nth-child(3n) {
+            background: #9bafca;
+        }
+
+        .hero-visual .icon-grid div:last-child {
+            background: #7d95b6;
+        }
+
+        /* 卡片通用 */
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 1.8rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .info-card {
+            background: #ffffff;
+            border-radius: 24px;
+            padding: 1.8rem 1.5rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.02);
+            border: 1px solid #e3e9f0;
+            transition: box-shadow 0.15s ease;
+        }
+
+        .info-card:hover {
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.03);
+            border-color: #d2dce9;
+        }
+
+        .info-card h3 {
+            font-size: 1.3rem;
+            font-weight: 500;
+            margin-bottom: 0.75rem;
+            color: #0b1a2e;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .info-card p {
+            font-size: 0.95rem;
+            color: #36454f;
+            line-height: 1.65;
+        }
+
+        .info-card .tag {
+            display: inline-block;
+            background: #eef3f9;
+            border-radius: 40px;
+            padding: 0.2rem 0.9rem;
+            font-size: 0.75rem;
+            font-weight: 500;
+            color: #1e3b5a;
+            margin-top: 1rem;
+        }
+
+        /* 宽卡片 */
+        .wide-card {
+            background: #ffffff;
+            border-radius: 24px;
+            padding: 2rem 2.2rem;
+            border: 1px solid #e1e8f0;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.02);
+            margin-bottom: 2rem;
+        }
+
+        .wide-card h2 {
+            font-weight: 500;
+            font-size: 1.6rem;
+            margin-bottom: 1rem;
+            color: #0f202e;
+        }
+
+        .wide-card p {
+            color: #2c3e50;
+            margin-bottom: 1rem;
+        }
+
+        .link-paragraph {
+            background: #f7faff;
+            border-radius: 20px;
+            padding: 1.5rem 2rem;
+            border: 1px solid #dce5f0;
+        }
+
+        .link-paragraph a {
+            color: #1f5090;
+            text-decoration: none;
+            font-weight: 500;
+            border-bottom: 1px solid #b8cbdf;
+            transition: border-color 0.2s;
+        }
+
+        .link-paragraph a:hover {
+            border-bottom-color: #1f5090;
+        }
+
+        .faq-mini {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.2rem;
+            margin-top: 1.5rem;
+            background: #fafcfe;
+            border-radius: 18px;
+            padding: 1.2rem 1.5rem;
+            border: 1px solid #e3ecf5;
+        }
+
+        .faq-item p:first-child {
+            font-weight: 500;
+            font-size: 0.9rem;
+            color: #0f2b44;
+        }
+
+        .faq-item p:last-child {
+            font-size: 0.88rem;
+            color: #4a5b6f;
+        }
+
+        .footnote {
+            text-align: center;
+            margin-top: 3rem;
+            font-size: 0.8rem;
+            color: #65768a;
+            border-top: 1px solid #d9e1ec;
+            padding-top: 1.8rem;
+        }
+
+        hr {
+            border: none;
+            border-top: 1px solid #dee6f0;
+            margin: 0.8rem 0;
+        }
+
+        @media (max-width: 600px) {
+            body { padding: 1.2rem 0.8rem; }
+            .hero-card { padding: 2rem 1.5rem; flex-direction: column; align-items: flex-start; }
+            .hero-content h1 { font-size: 2rem; }
+            .wide-card { padding: 1.5rem; }
+            .link-paragraph { padding: 1.2rem; }
+        }
+    </style>
+</head>
+<body>
+<div class="page-container">
+
+    <!-- hero 主视觉 -->
+    <div class="hero-card">
+        <div class="hero-content">
+            <h1>再次遇见 <span>28圈</span></h1>
+            <p class="hero-desc">
+                一个你曾经到过、值得收藏的数字角落。无论隔了多久再回来，界面、信息与节奏都保持着熟悉的秩序。
+            </p>
+        </div>
+        <div class="hero-visual">
+            <div class="icon-grid">
+                <div></div><div></div><div></div>
+                <div></div><div></div><div></div>
+                <div></div><div></div><div></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 用途卡片 -->
+    <h3 style="font-weight:400; color:#2c3e50; margin-bottom:0.6rem;">· 常被使用的几个方向</h3>
+    <div class="card-grid">
+        <div class="info-card">
+            <h3>📋 信息归整</h3>
+            <p>将零散的链接、文档、备忘整理成轻量结构，适合需要快速回顾某一主题的人。</p>
+            <span class="tag">分类 · 标签</span>
+        </div>
+        <div class="info-card">
+            <h3>🔖 再次造访</h3>
+            <p>收藏后隔几天、几周甚至更久再打开，内容依然清晰，不会因为更新而丢失之前的脉络。</p>
+            <span class="tag">持续 · 稳定</span>
+        </div>
+        <div class="info-card">
+            <h3>🔄 日常参考</h3>
+            <p>作为日常浏览的固定站点之一，适合反复查阅某些固定条目、工具或笔记。</p>
+            <span class="tag">频繁 · 轻量</span>
+        </div>
+    </div>
+
+    <!-- 适合人群 + 自然链接段落 -->
+    <div class="wide-card">
+        <h2>适合哪些人</h2>
+        <p>习惯把浏览器书签攒成一大串、最后再也不打开的人；喜欢在固定页面记录零散想法的人；</p>
+        <p>或者只是需要一个安静、没有推送和强提醒的地方存放自己的数字痕迹。</p>
+
+        <div class="link-paragraph">
+            <p>如果你曾经打开过 <a href="https://index-28loop.com">28圈</a>，那么它就是那种值得加入书签栏、隔段时间回来看看的站点。不需要每次重新摸索入口，收藏即是在自己的导航里放了一盏小灯。</p>
+            <p style="margin-top:0.6rem; color:#475569;">不追求日活，不强调注册——保留再次访问的窗口，比什么都重要。</p>
+        </div>
+    </div>
+
+    <!-- FAQ 摘要 / 留意点 -->
+    <div style="margin-bottom: 2rem;">
+        <div class="faq-mini">
+            <div class="faq-item">
+                <p>内容会频繁变化吗？</p>
+                <p>通常保持稳定，偶尔会有细微调整，但不会让旧收藏失效。</p>
+            </div>
+            <div class="faq-item">
+                <p>需要记住什么吗？</p>
+                <p>不需要额外记忆。只需记住你收藏过 <strong>28圈</strong>，然后按习惯回来即可。</p>
+            </div>
+            <div class="faq-item">
+                <p>适合长期关注？</p>
+                <p>是的。页面风格与结构偏向持续可用，而非一次性活动页。</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- 小提示 -->
+    <div class="wide-card" style="padding: 1.2rem 2rem;">
+        <p style="display: flex; gap: 0.5rem; align-items: center;">
+            <span style="font-size:1.2rem;">🕊️</span> 
+            如果你发现自己再次输入 index-28loop.com ，说明这里已经成了你网络行走中一个安静的坐标。
+        </p>
+    </div>
+
+    <div class="footnote">
+        28圈 · 收藏即重逢<br>
+        <span style="opacity:0.5;">—— 不渲染，不催促，只是一个被整理过的角落。</span>
+    </div>
+
+</div>
+</body>
+</html>
